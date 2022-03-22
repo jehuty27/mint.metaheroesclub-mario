@@ -187,43 +187,48 @@ function App() {
                                 <h3 className="text-center text-2xl text-white">Mint your Metaheroes Club NFT</h3>
 
                                 {/* MINT WIDGET START */}
-                                <>
-                                    <div className="flex justify-center space-x-5 select-none">
-                                        <div className="flex items-center">
-                                            <div
-                                                className={
-                                                    (isContractReady() ? 'bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out cursor-pointer' : 'bg-gray-200 cursor-not-allowed') +
-                                                    ' w-8 h-8 border-2 border-white rounded-lg relative'
-                                                }
-                                                onClick={() => (isContractReady() ? decrementMintAmount() : null)}
-                                            >
-                                                <span className="text-3xl absolute -bottom-[0.15rem] left-[0.35rem] text-gray-800">-</span>
+                                {!data.loading && blockchain.smartContract !== null ? (
+                                    <>
+                                        <div className="flex justify-center space-x-5 select-none">
+                                            <div className="flex items-center">
+                                                <div
+                                                    className={
+                                                        (isContractReady()
+                                                            ? 'bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out cursor-pointer'
+                                                            : 'bg-gray-200 cursor-not-allowed') + ' w-8 h-8 border-2 border-white rounded-lg relative'
+                                                    }
+                                                    onClick={() => (isContractReady() ? decrementMintAmount() : null)}
+                                                >
+                                                    <span className="text-3xl absolute -bottom-[0.15rem] left-[0.35rem] text-gray-800">-</span>
+                                                </div>
+                                            </div>
+                                            <span className="text-5xl text-white">{mintAmount}</span>
+                                            <div className="flex items-center">
+                                                <div
+                                                    className={
+                                                        (isContractReady()
+                                                            ? 'bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out cursor-pointer'
+                                                            : 'bg-gray-200 cursor-not-allowed') + ' w-8 h-8 border-2 border-white rounded-lg relative'
+                                                    }
+                                                    onClick={() => (isContractReady() ? incrementMintAmount() : null)}
+                                                >
+                                                    <span className="text-3xl absolute -bottom-[0.15rem] left-[0.35rem] text-gray-800">+</span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <span className="text-5xl text-white">{mintAmount}</span>
-                                        <div className="flex items-center">
-                                            <div
-                                                className={
-                                                    (isContractReady() ? 'bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out cursor-pointer' : 'bg-gray-200 cursor-not-allowed') +
-                                                    ' w-8 h-8 border-2 border-white rounded-lg relative'
-                                                }
-                                                onClick={() => (isContractReady() ? incrementMintAmount() : null)}
-                                            >
-                                                <span className="text-3xl absolute -bottom-[0.15rem] left-[0.35rem] text-gray-800">+</span>
+                                        {isContractReady() ? (
+                                            <div className="flex justify-center">
+                                                <button
+                                                    className="bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out hover:text-black px-12 py-2 rounded-xl text-3xl text-gray-800 border-4 border-white"
+                                                    onClick={() => claimNFTs()}
+                                                >
+                                                    Mint For {(utils.formatEther(data.cost, 'ether') * mintAmount).toFixed(3).replace(/(\.0+|0+)$/, '')}
+                                                </button>
                                             </div>
-                                        </div>
-                                    </div>
-                                    {isContractReady() ? (
-                                        <div className="flex justify-center">
-                                            <button
-                                                className="bg-primary hover:bg-yellow-400 transition-all duration-300 ease-in-out hover:text-black px-12 py-2 rounded-xl text-3xl text-gray-800 border-4 border-white"
-                                                onClick={() => claimNFTs()}
-                                            >
-                                                Mint For {(utils.formatEther(data.cost, 'ether') * mintAmount).toFixed(3).replace(/(\.0+|0+)$/, '')}
-                                            </button>
-                                        </div>
-                                    ) : null}
-                                </>
+                                        ) : null}
+                                    </>
+                                ) : null}
+
                                 {/* MINT WIDGET END */}
 
                                 {blockchain.account === '' || blockchain.smartContract === null ? (
@@ -338,3 +343,4 @@ function App() {
 }
 
 export default App
+
