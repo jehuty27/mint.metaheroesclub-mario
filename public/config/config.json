@@ -1,0 +1,14 @@
+{
+    "CONTRACT_ADDRESS": "0x8895B64E129fCD65B1A022a0B290A8716fD4aEFF",
+    "SCAN_LINK": "https://etherscan.io/address/0x8895B64E129fCD65B1A022a0B290A8716fD4aEFF",
+    "NETWORK": {
+        "NAME": "Ethereum",
+        "SYMBOL": "ETH",
+        "ID": 1
+    },
+    "NFT_NAME": "Metaheroes Club",
+    "SYMBOL": "MHC",
+    "GAS_LIMIT": 285000,
+    "MARKETPLACE": "Opensea",
+    "MARKETPLACE_LINK": "https://opensea.io"
+}
