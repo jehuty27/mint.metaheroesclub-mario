@@ -194,7 +194,7 @@ function App() {
                                 </div>
                             ) : null}
                             <div className="px-16 py-10 bg-[#2C2D31] space-y-7 rounded-3xl border-2 border-[#3E3E3E]">
-                                <h3 className="text-center text-2xl text-white">Mint your Metaheroes Club NFT</h3>
+                                <h3 className="text-center text-2xl text-white">Mint Your Metaheroes Club NFT</h3>
 
                                 {/* MINT WIDGET START */}
                                 {!data.loading && blockchain.smartContract !== null ? (
