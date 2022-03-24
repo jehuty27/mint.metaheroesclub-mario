@@ -55,7 +55,7 @@ function App() {
                         if (element.toLowerCase() === blockchain.account.toLowerCase()) {
                             return minting()
                         } else {
-                            toast.error('This address is not whitelisted')
+                            return toast.error('This address is not whitelisted')
                         }
                     })
                 } else {
@@ -72,7 +72,7 @@ function App() {
         let totalGasLimit = String(gasLimit * mintAmount)
         toast.info(`Minting your ${CONFIG.NFT_NAME}...`)
         setClaimingNft(true)
-        blockchain.smartContract.methods
+        return blockchain.smartContract.methods
             .mint(mintAmount)
             .send({
                 gasLimit: String(totalGasLimit),
@@ -142,6 +142,18 @@ function App() {
         return blockchain.account && !data.loading
     }
 
+    const saleStatus = () => {
+        if (data.paused) {
+            return 'Paused'
+        } else if (!data.paused && data.isWhitelistMintEnabled) {
+            return 'Whitelist Minting'
+        } else if (!data.paused && data.cost == 65000000000000000) {
+            return 'Presale Minting'
+        } else {
+            return 'Public Minting'
+        }
+    }
+
     useEffect(() => {
         getConfig()
     }, [])
@@ -176,9 +188,7 @@ function App() {
                                         <div className="flex items-center space-x-2">
                                             {data.paused ? <span className="w-3 h-3 rounded-full bg-red-500"></span> : <span className="w-3 h-3 rounded-full bg-green-400"></span>}
 
-                                            <span className="font-poppins text-xs uppercase font-medium text-gray-300">
-                                                {data.paused ? 'Paused' : <>{data.isWhitelistMintEnabled ? 'Whitelist Minting' : 'Public Minting'}</>}
-                                            </span>
+                                            <span className="font-poppins text-xs uppercase font-medium text-gray-300">{saleStatus()}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -343,4 +353,3 @@ function App() {
 }
 
 export default App
-
