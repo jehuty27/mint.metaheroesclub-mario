@@ -51,13 +51,12 @@ function App() {
                 toast.warning('You have exceeded the max limit of minting.')
             } else {
                 if (data.isWhitelistMintEnabled) {
-                    whitelistAddresses.some((element) => {
-                        if (element.toLowerCase() === blockchain.account.toLowerCase()) {
-                            return minting()
-                        } else {
-                            return toast.error('This address is not whitelisted')
-                        }
-                    })
+                    const found_whitelist_address = whitelistAddresses.find((element) => element.toLowerCase() === blockchain.account.toLowerCase())
+                    if (found_whitelist_address) {
+                        return minting()
+                    } else {
+                        toast.error('This address is not whitelisted')
+                    }
                 } else {
                     minting()
                 }
