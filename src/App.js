@@ -274,7 +274,7 @@ function App() {
             <div className="h-48 bg-gradient-to-r from-[#0D0D0D] to-[#2C2C02] relative">
                 <div className="flex justify-center">
                     <div className="mt-8 flex justify-center items-center space-x-7">
-                        <a href="/">
+                        <a href="https://opensea.io/collection/metaheroes-club-collection">
                             <svg
                                 className="fill-current text-gray-400 hover:text-primary transition-all duration-300 ease-in-out cursor-pointer w-36"
                                 viewBox="0 0 437 100"
