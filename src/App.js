@@ -68,13 +68,12 @@ function App() {
         let cost = data.cost
         let gasLimit = CONFIG.GAS_LIMIT
         let totalCostWei = String(cost * mintAmount)
-        let totalGasLimit = String(gasLimit * mintAmount)
         toast.info(`Minting your ${CONFIG.NFT_NAME}...`)
         setClaimingNft(true)
         return blockchain.smartContract.methods
             .mint(mintAmount)
             .send({
-                gasLimit: String(totalGasLimit),
+                gasLimit: gasLimit,
                 to: CONFIG.CONTRACT_ADDRESS,
                 from: blockchain.account,
                 value: totalCostWei,
